@@ -1,0 +1,157 @@
+{
+	"nodes": {
+		"Elements": {
+			"lenses": [7]
+		},
+		"Game": {
+			"color": "#699DD4"
+		},
+		"Mechanics": {
+
+		},
+		"Story": {
+			"lenses": [70]
+		},
+		"Aesthetics": {
+
+		},
+		"Technology": {
+			"lenses": [92]
+		},
+		"Theme": {
+			"lenses": [9]
+		},
+		"Problem": {
+			"lenses": [12, 13]
+		},
+		"Risk": {
+			"color": "#FF7B76"
+		},
+		"Player": {},
+		"Audience": {},
+		"Demographics": {
+			"lenses": [16]
+		},
+		"Psychographics": {
+			"lenses": [17]
+		},
+		"Flow": {
+			"lenses": [18]
+		},
+		"Motivation": {
+			"lenses": [19]
+		},
+		"Space": {
+			"lenses": [21, 74]
+		},
+		"States": {
+			"lenses": [22, 80]
+		},
+		"Objects": {
+			"lenses": [23, 75, 76, 77, 78]
+		},
+		"Actions": {
+			"lenses": [23, 24]
+		},
+		"Goals": {
+			"lenses": [25]
+		},
+		"Skills": {
+			"lenses": [27, 34, 35]
+		},
+		"Chance": {
+			"lenses": [28, 29, 34]
+		},
+		"Balance": {
+			"color": "#FF7B76",
+			"lenses": [30, 31, 32, 33, 35, 47]
+		},
+		"Competition": {
+			"lenses": [36, 38]
+		},
+		"Cooperation": {
+			"lenses": [37, 38]
+		},
+		"Time": {
+			"lenses": [39]
+		},
+		"Reward": {
+			"lenses": [40, 41]
+		},
+		"Controls": {
+			"lenses": [53]
+		},
+		"Interest Curves": {
+			"lenses": [61]
+		},
+		"Inherent Interest": {
+			"lenses": [62]
+		}
+	},
+	"edges": {
+		"Game": {
+			"Elements": {},
+			"Theme": {},
+			"Player": {},
+			"Flow": {},
+			"Interface": {}
+		},
+		"Elements": {
+			"Mechanics": {},
+			"Story": {},
+			"Aesthetics": {},
+			"Technology": {},
+			"Risk": {}
+		},
+		"Theme": {
+			"Problem": {}
+		},
+		"Player": {
+			"Audience": {},
+			"Demographics": {},
+			"Psychographics": {},
+			"Motivation": {}
+		},
+		"Mechanics": {
+			"Space": {},
+			"Objects": {},
+			"States": {},
+			"Actions": {},
+			"Rules": {},
+			"Balance": {}
+		},
+		"Rules": {
+			"Goals": {},
+			"Skills": {},
+			"Chance": {},
+			"Reward": {}
+		},
+		"Goals": {
+			"Puzzles": {},
+			"Obstacles": {},
+			"Competition": {},
+			"Cooperation": {},
+			"Socialization": {},
+			"Exploration": {}
+		},
+		"Exploration": {
+			"Concepts": {},
+			"People": {},
+			"Self": {}
+		},
+		"Interface": {
+			"Controls": {},
+			"Virtual Interface": {},
+			"Feedback": {}
+		},
+		"Story": {
+			"Time": {},
+			"Interest Curves": {},
+			"Inherent Interest": {}
+		},
+		"Aesthetics": {
+			"Imagery": {},
+			"Audio": {}
+		}
+	}
+}
