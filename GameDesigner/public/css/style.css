@@ -1,8 +1,44 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	padding: 0;
+	margin: 0;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+#content {
+	position: absolute;
+	width: 1024px;
+	top: 0;
+	bottom: 0;
+	border-right: 1px solid #e0e0e0
+}
+
+canvas {
+
+}
+
+#depthInputContainer {
+	position: absolute;
+	left: 30px;
+	height: 40px;
+	background-color: #FFFFFF;
+	border: 1px solid #666666;
+	padding: 5px;
+}
+
+#depthInputContainer input {
+	position: relative;
+	top: 17px;
+}
+
+#depthInputContainer .label {
+	display: block;
+	position: absolute;
+	text-transform: uppercase;
+	font-family: "Open Sans";
+	font-size: 9pt;
+	font-weight: 400;
+	top: 4px;
+	left: 0;
+	right: 0;
+	text-align: center;
 }
