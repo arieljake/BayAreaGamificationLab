@@ -1,0 +1,65 @@
+{
+	"nodes": {
+		"Game": {},
+		"User:": {},
+		"Track:": {},
+		"Radio:": {},
+		"Station:": {},
+		"Volume:": {},
+		"Slideshow:": {},
+		"Scrobbling:": {},
+		"Artist:": {},
+		"RecentTracks:": {},
+		"RecentStations:": {}
+	},
+	"edges": {
+		"Game": {
+			"User": {},
+			"Track": {}
+		},
+		"User": {
+			"Track": {
+				"relationships": ["Likes", "Skip", "Open", "Add To Library", "Share", "Love", "Assign Tags To", "Add To Playlist", "Buy"],
+				"comments": ["and the opposites", "interesting feature; presents suggested tags!"]
+			},
+			"Radio": {
+				"relationships": ["Pause"],
+				"comments": []
+			},
+			"Station": {
+				"relationships": ["Create", "Play", "Delete"],
+				"comments": []
+			},
+			"Volume": {
+				"relationships": ["Modify"],
+				"comments": []
+			},
+			"Slideshow": {
+				"relationships": ["Disable"],
+				"comments": []
+			},
+			"Scrobbling": {
+				"relationships": ["Disable"],
+				"comments": ["interesting, why would one do that?"]
+			},
+			"Artist": {
+				"relationships": ["Open"],
+				"comments": []
+			},
+			"RecentTracks": {
+				"relationships": ["Open"],
+				"comments": []
+			},
+			"RecentStations": {
+				"relationships": ["Open"],
+				"comments": []
+			}
+		},
+		"Track": {
+			"Station": {
+				"relationships": ["Create"],
+				"comments": []
+			}
+		}
+	}
+}

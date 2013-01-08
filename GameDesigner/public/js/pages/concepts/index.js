@@ -15,7 +15,7 @@ $(document).ready(function()
 		})
 	}
 
-	async.forEachSeries(scriptDeps,
+	async.forEach(scriptDeps,
 		function(dep,done)
 		{
 			loadScript(dep,done);
@@ -30,6 +30,7 @@ $(document).ready(function()
 				"/js/pages/concepts/ArborGraphAlgos.js"
 			], function(EventEmitter,SysRenderer,NodeRenderer,EdgeRenderer,ArborGraphAlgos)
 			{
+				var dataUrl = "/data/concepts.json";
 				var content;
 				var canvas;
 				var sys;
@@ -260,6 +261,7 @@ $(document).ready(function()
 								else
 								{
 									items["select"] = {name: "Select", icon: "edit"};
+									items["edit"] = {name: "Edit", icon: "edit"};
 									items["delete"] = {name: "Delete", icon: "delete"};
 								}
 
@@ -278,6 +280,10 @@ $(document).ready(function()
 
 									case "delete":
 										nodeContextMenu.deleteNode();
+										break;
+
+									case "edit":
+										nodeContextMenu.editNode();
 										break;
 								}
 							}
@@ -316,6 +322,17 @@ $(document).ready(function()
 						sys.pruneNode(model.clickedNode);
 
 						model.setValue("deletedNode",model.clickedNode);
+					},
+
+					editNode: function()
+					{
+						var nodeName = prompt("Please enter the new node name:", model.clickedNode.name);
+
+						if (nodeName)
+						{
+							model.clickedNode.name = nodeName;
+							model.setValue("editedNode",model.clickedNode);
+						}
 					}
 				};
 				var graphSyncModel = {
@@ -323,6 +340,7 @@ $(document).ready(function()
 					{
 						model.ee.on("newNodeChanged",graphSyncModel.onGraphChange);
 						model.ee.on("deletedNodeChanged",graphSyncModel.onGraphChange);
+						model.ee.on("editedNodeChanged",graphSyncModel.onGraphChange);
 					},
 
 					onGraphChange: function()
@@ -330,7 +348,7 @@ $(document).ready(function()
 						var graph = graphSyncModel.serializeGameGraph();
 
 						$.ajax({
-							url: "/concepts",
+							url: dataUrl,
 							type: "POST",
 							data: JSON.stringify(graph),
 							contentType: "application/json",
@@ -398,14 +416,30 @@ $(document).ready(function()
 					canvas = $("<canvas id='viewport' width='1024' height='768'></canvas>").appendTo(content);
 					canvas.mousedown(function(e){ console.log("--- user interaction (" + e.type + ") ---"); });
 
-					var depthInputContainer = $("<div id='depthInputContainer'><span class='label'>Depth</span></div>").appendTo(content);
+					var depthInputContainer = $("<div id='depthInputContainer' class='settingsContainer'><span class='label'>Depth</span></div>").appendTo(content);
 					depthInputContainer.css("position","absolute");
 					depthInputContainer.css("top","20px");
+					depthInputContainer.css("left","200px");
 
 					var depthInput = $("<input type='number' id='depthInput' min='1' max='10' value='1' />").appendTo(depthInputContainer);
 					depthInput.bind("change", function()
 					{
 						model.setValue("depth",depthInput.val());
+					});
+
+					var dataUrlInputContainer = $("<div id='dataUrlInputContainer' class='settingsContainer'><span class='label'>Data</span></div>").appendTo(content);
+					dataUrlInputContainer.css("position","absolute");
+					dataUrlInputContainer.css("top","20px");
+					dataUrlInputContainer.css("left","20px");
+
+					var dataUrlInput = $("<input type='text' id='dataUrlInput' value='" + dataUrl + "' />").appendTo(dataUrlInputContainer);
+					dataUrlInput.bind("keypress", function(e)
+					{
+						if (e.keyCode == 13)
+						{
+							dataUrl = dataUrlInput.val();
+							loadData();
+						}
 					});
 
 					done();
@@ -429,7 +463,7 @@ $(document).ready(function()
 
 				function loadData(done)
 				{
-					$.get("/js/pages/concepts/concepts.json", function(data)
+					$.get(dataUrl, function(data)
 					{
 						sys.graft(data);
 
@@ -437,7 +471,8 @@ $(document).ready(function()
 						model.setValue("selectedNode",model.gameNode);
 						model.setValue("depth",1);
 
-						done();
+						if (done)
+							done();
 					});
 				}
 

@@ -31,14 +31,17 @@ app.configure('development', function ()
 	app.use(express.errorHandler());
 });
 
-app.get('/concepts', function (req, res)
+app.get('/:viewId', function (req, res)
 {
-	res.render("simpleView", {title: "Designer Concepts", pageScript: "/js/pages/concepts/index.js"})
+	res.render("simpleView", {title: req.params.viewId, pageScript: "/js/pages/" + req.params.viewId + "/index.js", params: req.query})
 });
 
-app.post('/concepts', function (req, res)
+app.post('/data/:fileName', function (req, res)
 {
-	fs.writeFile(__dirname + "/public/js/pages/concepts/concepts.json", JSON.stringify(req.body), function (err)
+	var fileName = req.params["fileName"];
+	var fileLoc = __dirname + "/public/data/" + fileName;
+
+	fs.writeFile(fileLoc, JSON.stringify(req.body), function (err)
 	{
 		if (err)
 			res.send({result: "error"});

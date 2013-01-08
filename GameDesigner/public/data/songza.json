@@ -1,0 +1,37 @@
+{
+	"nodes": {
+		"Game": {},
+		"User": {}
+	},
+	"edges": {
+		"Game": {
+			"User": {}
+		},
+		"User": {
+			"Music Concierge": {
+				"relationships": ["Open"],
+				"comments": []
+			},
+			"Popular Playlists": {
+				"relationships": ["Open"],
+				"comments": []
+			},
+			"All Playlists": {
+				"relationships": ["Open"],
+				"comments": []
+			},
+			"Track": {
+				"relationships": ["Pause", "Skip", "Approve"],
+				"comments": []
+			},
+			"Volume": {
+				"relationships": ["Modify"],
+				"comments": []
+			},
+			"Playlist": {
+				"relationships": ["Share", "Save", "Open"],
+				"comments": []
+			}
+		}
+	}
+}

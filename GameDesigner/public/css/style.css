@@ -6,19 +6,22 @@ body {
 
 #content {
 	position: absolute;
+	width: 150px;
+	left: 0;
+	top: 0;
+}
+
+canvas {
+	position: absolute;
 	width: 1024px;
+	left: 150px;
 	top: 0;
 	bottom: 0;
 	border-right: 1px solid #e0e0e0
 }
 
-canvas {
-
-}
-
-#depthInputContainer {
+.settingsContainer {
 	position: absolute;
-	left: 30px;
 	height: 40px;
 	background-color: #FFFFFF;
 	border: 1px solid #666666;
@@ -41,4 +44,17 @@ canvas {
 	left: 0;
 	right: 0;
 	text-align: center;
+}
+
+.breadcrumbContainer {
+	position: absolute;
+	left: 30px;
+	top: 100px;
+	background-color: #FFFFFF;
+	border: 1px solid #666666;
+	padding: 5px;
+}
+
+.breadcrumbContainer .breadcrumb {
+	display: block;
 }

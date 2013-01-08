@@ -2,9 +2,9 @@ extends layout
 
 block content
 
-  - jsonVal = "var pageScript = '" + pageScript + "';";
+  - jsOutput = "var pageScript = '" + pageScript + "'; var params = JSON.parse('" + JSON.stringify(params) + "');";
 
   script
-    !{jsonVal}
+    !{jsOutput}
 
   include simpleView.html
