@@ -30,9 +30,9 @@ define([
 
 				var nodePath = ArborGraphAlgos.search(model.sys,model.gameNode,model.selectedNode);
 
-				nodePath.forEach(function(node)
+				nodePath.forEach(function(node,index)
 				{
-					that.addBreadcrumbForNode(node);
+					that.addBreadcrumbForNode(node,index);
 				})
 			},
 
@@ -47,9 +47,10 @@ define([
 				that.breadcrumbs.empty();
 			},
 
-			addBreadcrumbForNode: function(node)
+			addBreadcrumbForNode: function(node,index)
 			{
-				var breadcrumb = $("<a class='breadcrumb' href='#breadcrumb'>" + node.name + "</a>").appendTo(that.breadcrumbContainer);
+				var breadcrumbItem = $("<li class='breadcrumb'></li>").appendTo(that.breadcrumbContainer);;
+				var breadcrumb = $("<a href='#'>" + node.name + "</a>").appendTo(breadcrumbItem);
 				breadcrumb.bind("click",that.onBreadcrumbClicked);
 				breadcrumb.data(node);
 

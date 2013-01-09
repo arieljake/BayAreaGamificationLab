@@ -16,6 +16,7 @@ define([
 			{
 				that.model = MainModel();
 				that.model.init();
+				that.model.ee.on("dataUrlChanged",that.onDataUrlChanged);
 
 				if (done)
 					done();
@@ -30,6 +31,14 @@ define([
 
 					if (done)
 						done();
+				});
+			},
+
+			onDataUrlChanged: function()
+			{
+				that.loadData(that.model.dataUrl,function()
+				{
+					console.log("game initialized");
 				});
 			}
 		};

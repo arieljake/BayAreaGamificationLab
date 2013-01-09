@@ -26,8 +26,6 @@ define([],function()
 			createDepthInputContainer: function()
 			{
 				var depthInputContainer = $("<div id='depthInputContainer'><span class='label'>Depth</span></div>").appendTo(content);
-				depthInputContainer.css("position","absolute");
-				depthInputContainer.css("top","20px");
 
 				return depthInputContainer;
 			},

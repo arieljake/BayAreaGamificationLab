@@ -13,14 +13,14 @@ body {
 
 canvas {
 	position: absolute;
-	width: 1024px;
-	left: 150px;
-	top: 0;
-	bottom: 0;
-	border-right: 1px solid #e0e0e0
+	width: 500px;
+	height: 500px;
+	top: 140px;
+	left: 20px;
+	border: 1px solid #e0e0e0
 }
 
-.settingsContainer {
+.settingsContainer, #depthInputContainer, #dataUrlInputContainer {
 	position: absolute;
 	height: 40px;
 	background-color: #FFFFFF;
@@ -28,9 +28,21 @@ canvas {
 	padding: 5px;
 }
 
+#depthInputContainer {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
 #depthInputContainer input {
 	position: relative;
 	top: 17px;
+}
+
+#dataUrlInputContainer {
+	position: absolute;
+	top: 20px;
+	left: 100px;
 }
 
 #depthInputContainer .label {
@@ -48,13 +60,25 @@ canvas {
 
 .breadcrumbContainer {
 	position: absolute;
-	left: 30px;
-	top: 100px;
+	left: 20px;
+	top: 90px;
+	width: 500px;
 	background-color: #FFFFFF;
-	border: 1px solid #666666;
 	padding: 5px;
 }
 
-.breadcrumbContainer .breadcrumb {
-	display: block;
+.breadcrumbContainer li {
+	display: inline;
+}
+
+.breadcrumbContainer li:not(:last-child) a:after {
+	content: "  >>  ";
+	display: inline-block;
+}
+
+.breadcrumbContainer li:last-child a {
+	pointer-events: none;
+	cursor: default;
+	text-decoration: none;
+	color: #000;
 }

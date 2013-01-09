@@ -13,7 +13,7 @@ define([
 	ArborGraphAlgos,
 	ScriptLoader
 ){
-	var VisibleTreeModel = function(model)
+	var VisibleTreeModel = function(model,width,height)
 	{
 		var that = {
 
@@ -48,6 +48,10 @@ define([
 			{
 				var sys = model.sys;
 
+				sys.prune(function(node,from,to)
+				{
+					return true;
+				});
 				sys.graft(model.graph);
 
 				model.gameNode = sys.getNode("Game");
@@ -108,11 +112,12 @@ define([
 			{
 				var canvas = model.canvas;
 
-				var pos = canvas.offset();
-				var mouseP = arbor.Point(e.pageX-pos.left, e.pageY-pos.top);
+				var canvasPos = canvas.offset();
+				var mouseP = arbor.Point(e.pageX-canvasPos.left, e.pageY-canvasPos.top);
 
 				console.log("--- user interaction (" + e.type + ") ---");
 
+				model.setValue("clickedPagePoint",arbor.Point(e.pageX, e.pageY));
 				model.setValue("clickedMousePoint",mouseP);
 			},
 
@@ -142,7 +147,9 @@ define([
 
 			createCanvas: function()
 			{
-				var canvas = $("<canvas id='viewport' width='1024' height='768'></canvas>").appendTo("body");
+				var canvas = $("<canvas id='viewport'></canvas>").appendTo("body");
+				canvas.attr("width",width || 1024);
+				canvas.attr("height",height || 768);
 
 				return canvas;
 			},

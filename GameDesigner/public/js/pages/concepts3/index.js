@@ -7,6 +7,7 @@ $(document).ready(function()
 		"/js/pages/concepts3/BreadcrumbsModel.js",
 		"/js/pages/concepts3/NodeContextMenu.js",
 		"/js/pages/concepts3/DepthInputControl.js",
+		"/js/pages/concepts3/DataUrlInputControl.js",
 		"/js/pages/concepts3/GraphAutoSave.js"
 	],function(
 		Game,
@@ -15,6 +16,7 @@ $(document).ready(function()
 		BreadcrumbsModel,
 		NodeContextMenu,
 		DepthInputControl,
+		DataUrlInputControl,
 		GraphAutoSave
 	){
 
@@ -31,7 +33,7 @@ $(document).ready(function()
 			},
 			function(done)
 			{
-				game.visibleTreeModel = VisibleTreeModel(game.model);
+				game.visibleTreeModel = VisibleTreeModel(game.model,500,500);
 				game.visibleTreeModel.init(done);
 			},
 			function(done)
@@ -56,15 +58,18 @@ $(document).ready(function()
 			},
 			function(done)
 			{
+				game.dataUrlInputControl = DataUrlInputControl(game.model,content);
+				game.dataUrlInputControl.init(done);
+			},
+			function(done)
+			{
 				game.graphAutoSave = GraphAutoSave(game.model);
 				game.graphAutoSave.init(done);
 			}
 		],function()
 		{
-			game.loadData("/data/concepts.json",function()
-			{
-				console.log("game initialized");
-			});
+			game.model.setValue("dataUrl","/data/concepts.json");
+			console.log("game initialized");
 		});
 	});
 })
