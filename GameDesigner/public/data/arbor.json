@@ -1,0 +1,30 @@
+{
+	"nodes": {
+		"Game": {}
+	},
+	"edges": {
+		"Game": {
+			"physics.ParticleSystem": {}
+		},
+		"physics.ParticleSystem": {
+			"Kernel": {}
+		},
+		"Kernel": {
+			"tween.Tween": {},
+			"physics.Worker": {}
+		},
+		"physics.Worker": {
+			"physics.Physics": {},
+			"physics.PhysicsWorker": {}
+		},
+		"physics.PhysicsWorker": {
+			"physics.Physics": {}
+		},
+		"physics.Physics": {
+			"physics.BarnesHutTree": {},
+			"physics.Particle": {},
+			"physics.Spring": {},
+			"physics.Point": {}
+		}
+	}
+}

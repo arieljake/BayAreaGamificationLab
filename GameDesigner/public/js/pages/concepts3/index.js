@@ -12,7 +12,6 @@ $(document).ready(function ()
 		"/js/pages/concepts3/GraphAutoSave.js"
 	], function (Game, Header, VisibleTreeModel, ClickedNodeModel, BreadcrumbsModel, NodeContextMenu, DepthInputControl, DataUrlInputControl, GraphAutoSave)
 	{
-
 		var content;
 		var settings;
 		var game;
@@ -67,6 +66,14 @@ $(document).ready(function ()
 			{
 				game.graphAutoSave = GraphAutoSave(game.model);
 				game.graphAutoSave.init(done);
+			},
+			function (done)
+			{
+				require(["/js/pages/concepts3/NodeDrag.js"],function(NodeDrag)
+				{
+					game.nodeDrag = NodeDrag(game.model);
+					game.nodeDrag.init(done);
+				});
 			}
 		], function ()
 		{

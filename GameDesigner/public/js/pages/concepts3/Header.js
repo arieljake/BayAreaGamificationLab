@@ -10,7 +10,7 @@ define([
 
 			init: function(done)
 			{
-				parent.append("<div id='header'><span class='title'>Game Designer</span></div>");
+				parent.append("<div id='header'><span class='title'>Knowledge Graph</span></div>");
 
 				if (done)
 					done();

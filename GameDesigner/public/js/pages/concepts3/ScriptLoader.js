@@ -7,7 +7,7 @@ define([], function()
 
 		loadScripts: function(scripts,allDone)
 		{
-			async.forEach(scripts,function(script,done)
+			async.forEachSeries(scripts,function(script,done)
 			{
 				ScriptLoader.loadScript(script,done);
 			},function()

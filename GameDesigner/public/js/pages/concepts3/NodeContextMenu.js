@@ -26,7 +26,7 @@ define([
 
 			onNodeClicked: function(e)
 			{
-				$(".context-menu-one").contextMenu(model.clickedPagePoint);
+				$(".context-menu-one").contextMenu(model.clickedScreenPoint);
 			},
 
 			newNode: function()

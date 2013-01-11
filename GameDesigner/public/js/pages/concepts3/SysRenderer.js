@@ -43,8 +43,7 @@ define(["/js/external/EventEmitter.js"], function(EventEmitter)
 
 			redraw:function()
 			{
-				ctx.fillStyle = "#FFF";
-				ctx.fillRect(0,0, canvasElem.width, canvasElem.height)
+				ctx.clearRect(0, 0, canvasElem.width, canvasElem.height);
 				ctx.drawImage(that.bkgdImg,0,0);
 
 				sys.eachEdge(function(edge,pt1,pt2)

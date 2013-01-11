@@ -22,7 +22,10 @@ define([
 				model[name] = value;
 				model[name + "Changed"] = true;
 				model._setValues.push(name);
+
 				console.log(name + "Changed");
+				console.dir(value);
+
 				model.ee.emit(name + "Changed",{oldValue: oldValue, newValue: value});
 			},
 

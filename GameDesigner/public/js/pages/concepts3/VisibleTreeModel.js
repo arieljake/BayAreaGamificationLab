@@ -29,12 +29,14 @@ define([
 				ScriptLoader.loadScripts(that.scriptDeps,function()
 				{
 					model.canvas = that.createCanvas();
+					model.canvas.bind("mousedown",that.onCanvasMouseDown);
 					model.canvas.bind("click",that.onCanvasClick);
 
 					model.sys = that.createParticleSystem(model.canvas);
 
 					model.ee.on("graphChanged", that.onGraphChange);
-					model.ee.on("clickedMousePointChanged", that.onMousePointClicked);
+					model.ee.on("mouseDownCanvasPointChanged", that.onCanvasPointMouseDown);
+					model.ee.on("clickedCanvasPointChanged", that.onCanvasPointClicked);
 					model.ee.on("depthChanged", that.refresh);
 					model.ee.on("selectedNodeChanged", that.refresh);
 					model.ee.on("newNodeChanged", that.refresh);
@@ -105,28 +107,67 @@ define([
 				console.log("visible tree refreshed");
 			},
 
-			onCanvasClick: function(e)
+			onCanvasMouseDown: function(e)
 			{
 				var canvas = model.canvas;
-
 				var canvasPos = canvas.offset();
 				var mouseP = arbor.Point(e.pageX-canvasPos.left, e.pageY-canvasPos.top);
+				var screenP = arbor.Point(e.pageX, e.pageY);
 
 				console.log("--- user interaction (" + e.type + ") ---");
 
-				model.setValue("clickedPagePoint",arbor.Point(e.pageX, e.pageY));
-				model.setValue("clickedMousePoint",mouseP);
+				model.setValue("mouseDownScreenPoint",screenP);
+				model.setValue("mouseDownCanvasPoint",mouseP);
 			},
 
-			onMousePointClicked: function()
+			onCanvasClick: function(e)
+			{
+				var canvas = model.canvas;
+				var canvasPos = canvas.offset();
+				var mouseP = arbor.Point(e.pageX-canvasPos.left, e.pageY-canvasPos.top);
+				var screenP = arbor.Point(e.pageX, e.pageY);
+
+				console.log("--- user interaction (" + e.type + ") ---");
+
+				model.setValue("clickedScreenPoint",screenP);
+				console.dir(screenP);
+				model.setValue("clickedCanvasPoint",mouseP);
+				console.dir(mouseP);
+			},
+
+			onCanvasPointMouseDown: function()
 			{
 				var sys = model.sys;
 				var selectedNode = model.selectedNode;
-				var clickedPoint = model.clickedMousePoint;
+				var mouseDownPoint = model.mouseDownCanvasPoint;
 
 				ArborGraphAlgos.diveBreadthFirst(sys,selectedNode,function(node,context)
 				{
-					var distance = sys.toScreen(node.p).subtract(clickedPoint).magnitude();
+					var distance = sys.toScreen(node._p).subtract(mouseDownPoint).magnitude();
+
+					if (node.data._visibleTree == false)
+					{
+						console.log("end of visible tree reached");
+						return true;
+					}
+					else if (distance <= node.data.radius)
+					{
+						console.log("visible node mouse down");
+						model.setValue("mouseDownNode",node);
+						return true;
+					}
+				});
+			},
+
+			onCanvasPointClicked: function()
+			{
+				var sys = model.sys;
+				var selectedNode = model.selectedNode;
+				var clickedPoint = model.clickedCanvasPoint;
+
+				ArborGraphAlgos.diveBreadthFirst(sys,selectedNode,function(node,context)
+				{
+					var distance = sys.toScreen(node._p).subtract(clickedPoint).magnitude();
 
 					if (node.data._visibleTree == false)
 					{
