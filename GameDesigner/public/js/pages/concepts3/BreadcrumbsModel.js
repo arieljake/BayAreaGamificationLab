@@ -6,7 +6,7 @@ define([
 	ArborGraphAlgos,
 	LinkedList
 ){
-	var BreadcrumbsModel = function(model,content)
+	var BreadcrumbsModel = function(model,parent)
 	{
 		var that = {
 
@@ -67,7 +67,9 @@ define([
 
 			createBreadcrumbContainer: function()
 			{
-				var container = $("<div class='breadcrumbContainer'></div>").appendTo(content);
+				var container = $("<div class='breadcrumbContainer'></div>").appendTo(parent);
+
+				parent.append("<span class='sectionTitle breadcrumbs'>Location</span>");
 
 				return container;
 			}

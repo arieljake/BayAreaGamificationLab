@@ -12,10 +12,13 @@ define([], function()
 				var strokeStyle = params.strokeStyle || "#FFFFFF";
 				var text = params.text || "";
 				var radius = params.radius || 20;
+				var fontSize = params.fontSize || "14pt";
+				var fontFamily = params.fontFamily || "Arial";
 				var textWidth = this.measureText(text).width;
 
 				this.fillStyle = fillStyle;
 				this.strokeStyle = strokeStyle;
+				this.font = fontSize + ' ' + fontFamily;
 				this.beginPath();
 				this.arc(pt.x, pt.y, radius, 0, 2*Math.PI);
 				this.closePath();

@@ -13,7 +13,7 @@ define([
 	ArborGraphAlgos,
 	ScriptLoader
 ){
-	var VisibleTreeModel = function(model,width,height)
+	var VisibleTreeModel = function(model,width,height,parent,backgroundImage)
 	{
 		var that = {
 
@@ -39,8 +39,7 @@ define([
 					model.ee.on("selectedNodeChanged", that.refresh);
 					model.ee.on("newNodeChanged", that.refresh);
 
-					if (done)
-						done();
+					model.sys.renderer.init(done);
 				})
 			},
 
@@ -86,13 +85,11 @@ define([
 				if (visibleTreeStart)
 				{
 					visibleTreeStart.data._visibleTree = true;
-					visibleTreeStart.data.radius = 20;
 
 					ArborGraphAlgos.dive(sys,visibleTreeStart,
 						function(node,context)
 						{
 							node.data._visibleTree = true;
-							node.data.radius = 20;
 						},
 						function(edge,context)
 						{
@@ -147,24 +144,28 @@ define([
 
 			createCanvas: function()
 			{
-				var canvas = $("<canvas id='viewport'></canvas>").appendTo("body");
+				var canvas = $("<canvas id='viewport'></canvas>").appendTo(parent);
 				canvas.attr("width",width || 1024);
 				canvas.attr("height",height || 768);
+
+				parent.append("<span class='sectionTitle visibleTreeModel'>Graph</span>");
 
 				return canvas;
 			},
 
 			createParticleSystem: function(canvas)
 			{
-				var sys = arbor.ParticleSystem({ // create the system with sensible repulsion/stiffness/friction
-					repulsion: 1000,
-					stiffness: 1000,
-					friction: 1,
+				var sys = arbor.ParticleSystem({
+					repulsion: 500,
+					stiffness: 0,
+					friction: 0.0,
+					integrator: "verlet",
 					gravity: true
 				});
 				sys.renderer = SysRenderer(sys,canvas,{
-					nodeRenderer: NodeRenderer,
-					edgeRenderer: EdgeRenderer
+					nodeRenderer: NodeRenderer(model),
+					edgeRenderer: EdgeRenderer(model),
+					backgroundImage: backgroundImage
 				});
 
 				return sys;
