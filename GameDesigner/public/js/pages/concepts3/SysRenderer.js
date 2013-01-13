@@ -26,10 +26,6 @@ define(["/js/external/EventEmitter.js"], function(EventEmitter)
 
 			init:function(done)
 			{
-				sys.fps(24);
-				sys.screenSize(canvasElem.width, canvasElem.height)
-				sys.screenPadding(80) // leave an extra 80px of whitespace per side
-
 				if (!backgroundImage)
 					return done ? done() : undefined;
 

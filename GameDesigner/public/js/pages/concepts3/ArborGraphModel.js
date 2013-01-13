@@ -13,7 +13,7 @@ define([
 	ArborGraphAlgos,
 	ScriptLoader
 ){
-	var VisibleTreeModel = function(model,width,height,parent,backgroundImage)
+	var ArborGraphModel = function(model,width,height,parent,backgroundImage)
 	{
 		var that = {
 
@@ -32,7 +32,7 @@ define([
 					model.canvas.bind("mousedown",that.onCanvasMouseDown);
 					model.canvas.bind("click",that.onCanvasClick);
 
-					model.sys = that.createParticleSystem(model.canvas);
+					model.sys = window.sys = that.createParticleSystem(model.canvas);
 
 					model.ee.on("graphChanged", that.onGraphChange);
 					model.ee.on("mouseDownCanvasPointChanged", that.onCanvasPointMouseDown);
@@ -208,6 +208,9 @@ define([
 					edgeRenderer: EdgeRenderer(model),
 					backgroundImage: backgroundImage
 				});
+				sys.fps(24);
+				sys.screenSize(canvas.attr("width"), canvas.attr("height"));
+				sys.screenPadding(0);
 
 				return sys;
 			}
@@ -216,5 +219,5 @@ define([
 		return that;
 	};
 
-	return VisibleTreeModel;
+	return ArborGraphModel;
 });

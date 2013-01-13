@@ -3,14 +3,14 @@ $(document).ready(function ()
 	require([
 		"/js/pages/concepts3/Game.js",
 		"/js/pages/concepts3/Header.js",
-		"/js/pages/concepts3/VisibleTreeModel.js",
+		"/js/pages/concepts3/ArborGraphModel.js",
 		"/js/pages/concepts3/ClickedNodeModel.js",
 		"/js/pages/concepts3/BreadcrumbsModel.js",
 		"/js/pages/concepts3/NodeContextMenu.js",
 		"/js/pages/concepts3/DepthInputControl.js",
 		"/js/pages/concepts3/DataUrlInputControl.js",
 		"/js/pages/concepts3/GraphAutoSave.js"
-	], function (Game, Header, VisibleTreeModel, ClickedNodeModel, BreadcrumbsModel, NodeContextMenu, DepthInputControl, DataUrlInputControl, GraphAutoSave)
+	], function (Game, Header, ArborGraphModel, ClickedNodeModel, BreadcrumbsModel, NodeContextMenu, DepthInputControl, DataUrlInputControl, GraphAutoSave)
 	{
 		var content;
 		var settings;
@@ -34,7 +34,7 @@ $(document).ready(function ()
 			},
 			function (done)
 			{
-				game.visibleTreeModel = VisibleTreeModel(game.model, 480, 420, content, "/images/shadow9canvas.png");
+				game.visibleTreeModel = ArborGraphModel(game.model, 480, 420, content, "/images/shadow9canvas.png");
 				game.visibleTreeModel.init(done);
 			},
 			function (done)
